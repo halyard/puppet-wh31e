@@ -1,0 +1,19 @@
+{
+  "name": "halyard-wh31e",
+  "version": "0.0.6",
+  "author": "Les Aker",
+  "license": "MIT",
+  "summary": "Configure wh31e_metrics",
+  "source": "https://github.com/halyard/puppet-wh31e",
+  "project_page": "https://github.com/halyard/puppet-wh31e",
+  "issues_url": "https://github.com/halyard/puppet-wh31e/issues",
+  "dependencies": [
+    {
+      "name": "halyard/sdr",
+      "version_requirement": ">= 0.0.0 < 1.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+
+  ]
+}

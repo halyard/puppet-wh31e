@@ -13,7 +13,7 @@ class wh31e (
   String $influx_token,
   String $influx_bucket,
   Hash[Integer, String] $sensor_names,
-  String $version = '0.0.4',
+  String $version = 'v0.0.4',
   String $binfile = '/usr/local/bin/wh31e_metrics',
 ) {
   class { 'sdr': }

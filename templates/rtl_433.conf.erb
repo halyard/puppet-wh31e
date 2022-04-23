@@ -1,0 +1,6 @@
+frequency 915M
+protocol 113
+sample_rate <%= @sample_rate %>
+report_meta time:utc
+output json:/var/lib/wh31e/signal.json
+output syslog:127.0.0.1:1514

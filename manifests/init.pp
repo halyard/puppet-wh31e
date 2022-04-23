@@ -5,6 +5,7 @@
 # @param influx_token sets the credential to use for metric submission
 # @param influx_bucket sets the InfluxDB bucket
 # @param sensor_names sets the mapping between sensor ID and human name
+# @param sample_rate sets the polling speed for new data
 # @param version sets the version of wh31e_metrics to install
 # @param binfile sets the install path for the wh31e_metrics binary
 class wh31e (
@@ -13,15 +14,16 @@ class wh31e (
   String $influx_token,
   String $influx_bucket,
   Hash[Integer, String] $sensor_names,
+  String sample_rate = '250k',
   String $version = 'v0.0.4',
   String $binfile = '/usr/local/bin/wh31e_metrics',
 ) {
   class { 'sdr': }
 
   -> file { '/usr/local/etc/rtl_433/rtl_433.conf':
-    ensure => file,
-    source => 'puppet:///modules/wh31e/rtl_433.conf',
-    notify => Service['rtl_433'],
+    ensure  => file,
+    content => template('wh31e/rtl_433.conf.erb'),
+    notify  => Service['rtl_433'],
   }
 
   -> file { '/var/lib/wh31e':

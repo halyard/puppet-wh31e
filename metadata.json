@@ -1,6 +1,6 @@
 {
   "name": "halyard-wh31e",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Les Aker",
   "license": "MIT",
   "summary": "Configure wh31e_metrics",

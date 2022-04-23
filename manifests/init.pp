@@ -14,7 +14,7 @@ class wh31e (
   String $influx_token,
   String $influx_bucket,
   Hash[Integer, String] $sensor_names,
-  String sample_rate = '250k',
+  String $sample_rate = '250k',
   String $version = 'v0.0.4',
   String $binfile = '/usr/local/bin/wh31e_metrics',
 ) {

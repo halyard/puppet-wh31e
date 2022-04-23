@@ -1,0 +1,9 @@
+[Unit]
+Description=RTL-SDR collector for wh31e
+
+[Service]
+ExecStart=/usr/local/bin/rtl_433
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

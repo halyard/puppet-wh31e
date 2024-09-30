@@ -1,22 +1,18 @@
-# @summary Configure wh31e_metrics
+# @summary Configure wh31e metrics
 #
-# @param influx_url sets the InfluxDB hostname
-# @param influx_org sets the InfluxDB Organization
-# @param influx_token sets the credential to use for metric submission
-# @param influx_bucket sets the InfluxDB bucket
 # @param sensor_names sets the mapping between sensor ID and human name
 # @param sample_rate sets the polling speed for new data
-# @param version sets the version of wh31e_metrics to install
-# @param binfile sets the install path for the wh31e_metrics binary
+# @param version sets the version of wh31e to install
+# @param binfile sets the install path for the wh31e binary
+# @param prometheus_server_ip sets the IP range to allow for prometheus connections
+# @param port to serve the wh31e metrics on
 class wh31e (
-  String $influx_url,
-  String $influx_org,
-  String $influx_token,
-  String $influx_bucket,
   Hash[Integer, String] $sensor_names,
   String $sample_rate = '250k',
-  String $version = 'v0.0.4',
-  String $binfile = '/usr/local/bin/wh31e_metrics',
+  String $version = 'v0.1.0',
+  String $binfile = '/usr/local/bin/wh31e',
+  String $prometheus_server_ip = '0.0.0.0/0',
+  Integer $port = 9131,
 ) {
   class { 'sdr': }
 
@@ -49,8 +45,8 @@ class wh31e (
     default   => 'error',
   }
 
-  $filename = "wh31e_metrics_${kernel}_${arch}"
-  $url = "https://github.com/akerl/wh31e_metrics/releases/download/${version}/${filename}"
+  $filename = "wh31e_${kernel}_${arch}"
+  $url = "https://github.com/akerl/wh31e/releases/download/${version}/${filename}"
 
   file { $binfile:
     ensure => file,
@@ -58,24 +54,31 @@ class wh31e (
     mode   => '0755',
     owner  => 'root',
     group  => 'root',
-    notify => Service['wh31e_metrics'],
+    notify => Service['wh31e'],
   }
 
-  -> file { '/usr/local/etc/wh31e_metrics.conf':
+  -> file { '/usr/local/etc/wh31e.conf':
     ensure  => file,
     mode    => '0644',
-    content => template('wh31e/wh31e_metrics.conf.erb'),
-    notify  => Service['wh31e_metrics'],
+    content => template('wh31e/wh31e.conf.erb'),
+    notify  => Service['wh31e'],
   }
 
-  -> file { '/etc/systemd/system/wh31e_metrics.service':
+  -> file { '/etc/systemd/system/wh31e.service':
     ensure => file,
-    source => 'puppet:///modules/wh31e/wh31e_metrics.service',
+    source => 'puppet:///modules/wh31e/wh31e.service',
   }
 
-  ~> service { 'wh31e_metrics':
+  ~> service { 'wh31e':
     ensure => running,
     enable => true,
     notify => Service['rtl_433'],
+  }
+
+  firewall { '100 allow prometheus wh31e metrics':
+    source => $prometheus_server_ip,
+    dport  => $port,
+    proto  => 'tcp',
+    action => 'accept',
   }
 }

@@ -3,7 +3,7 @@
   "version": "0.0.28",
   "author": "Les Aker",
   "license": "MIT",
-  "summary": "Configure wh31e_metrics",
+  "summary": "Configure wh31e metrics",
   "source": "https://github.com/halyard/puppet-wh31e",
   "project_page": "https://github.com/halyard/puppet-wh31e",
   "issues_url": "https://github.com/halyard/puppet-wh31e/issues",

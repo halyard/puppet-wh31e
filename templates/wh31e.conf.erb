@@ -1,0 +1,7 @@
+syslog_host: 127.0.0.1
+syslog_port: 1514
+port: <%= @port %>
+sensor_names:
+<% @sensor_names.each do |id, name| -%>
+  <%= id %>: <%= name %>
+<% end -%>

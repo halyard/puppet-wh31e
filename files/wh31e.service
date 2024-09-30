@@ -1,0 +1,9 @@
+[Unit]
+Description=Expose wh31e data as metrics
+
+[Service]
+ExecStart=/usr/local/bin/wh31e serve /usr/local/etc/wh31e.conf
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

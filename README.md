@@ -5,7 +5,7 @@ puppet-wh31e
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/halyard/puppet-wh31e/build.yml?branch=main)](https://github.com/halyard/puppet-wh31e/actions)
 [![MIT Licensed](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://tldrlegal.com/license/mit-license)
 
-Module to configure [wh31e_metrics](https://github.com/akerl/wh31e_metrics)
+Module to configure [wh31e](https://github.com/akerl/wh31e)
 
 ## Usage
 

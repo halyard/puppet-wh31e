@@ -1,9 +1,0 @@
-[Unit]
-Description=Syslog to influx forwarder
-
-[Service]
-ExecStart=/usr/local/bin/wh31e_metrics /usr/local/etc/wh31e_metrics.conf
-Restart=always
-
-[Install]
-WantedBy=multi-user.target

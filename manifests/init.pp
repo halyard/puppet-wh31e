@@ -9,7 +9,7 @@
 class wh31e (
   Hash[Integer, String] $sensor_names,
   String $sample_rate = '250k',
-  String $version = 'v0.2.0',
+  String $version = 'v0.2.1',
   String $binfile = '/usr/local/bin/wh31e',
   String $prometheus_server_ip = '0.0.0.0/0',
   Integer $port = 9131,
